@@ -225,13 +225,18 @@ jQuery( function() {
                }
            }
        );
+    
+       jQuery("#previewscrips input[name=TxnSendMailToAll]").click(function() { return false; });
        jQuery('#previewscrips div.titlebox-content').load( '<% RT->Config->Get('WebPath')%>/Helpers/PreviewScrips',
            jQuery('form[name=TicketUpdate]').serializeArray(),
            function() {
+                console.log("Loading preview scrips helper");
                var txn_send_field = jQuery("#previewscrips input[name=TxnSendMailTo]");
                txn_send_field.change( syncCheckboxes );
                txn_send_field.click( function () { setCheckbox(this) } );
-               jQuery("#previewscrips input[name=TxnSendMailToAll]").click( function() { setCheckbox(this, 'TxnSendMailTo'); } );
+               jQuery("#previewscrips input[name=TxnSendMailToAll]").click( function() { 
+                    setCheckbox(this, 'TxnSendMailTo');
+                } );
                if (txn_send_field.length > 0) {
                    setCheckbox(txn_send_field[0]);
                }
